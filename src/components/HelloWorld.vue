@@ -37,21 +37,44 @@
       我们也需要为每个组件提供一个“key”，稍后再
       作详细解释。
     -->
-        <todo-item
+        <!-- <todoitem
           v-for="item in groceryList"
-          v-bind:todo="item"
-          v-bind:key="item.id"
-        ></todo-item>
+          :text="item.text"
+          :key="item.id"
+        ></todoitem> -->
       </ol>
+    </div>
+    <div id="todo-list-example">
+      <form v-on:submit.prevent="addNewTodo">
+        <label for="new-todo">Add a todo</label>
+        <input
+          v-model="newTodoText"
+          id="new-todo"
+          placeholder="E.g. Feed the cat"
+        />
+        <button>Add</button>
+      </form>
+      <ul>
+        <todoitem
+          v-for="(todo, index) in todos"
+          :key="todo.id"
+          :title="todo.title"
+          @remove="todos.splice(index, 1)"
+        ></todoitem>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+import todoitem from "./Item.vue";
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
+  },
+  components: {
+    todoitem,
   },
   data() {
     return {
@@ -64,16 +87,39 @@ export default {
         { text: "Learn Vue" },
         { text: "Build something awesome" },
       ],
-       groceryList: [
-        { id: 0, text: 'Vegetables' },
-        { id: 1, text: 'Cheese' },
-        { id: 2, text: 'Whatever else humans are supposed to eat' }
+      groceryList: [
+        { id: 0, text: "Vegetables" },
+        { id: 1, text: "Cheese" },
+        { id: 2, text: "Whatever else humans are supposed to eat" },
       ],
+      newTodoText: "",
+      todos: [
+        {
+          id: 1,
+          title: "Do the dishes",
+        },
+        {
+          id: 2,
+          title: "Take out the trash",
+        },
+        {
+          id: 3,
+          title: "Mow the lawn",
+        },
+      ],
+      nextTodoId: 4,
     };
   },
   methods: {
     reverseMessage() {
       this.message = this.message.split("").reverse().join("");
+    },
+    addNewTodo() {
+      this.todos.push({
+        id: this.nextTodoId++,
+        title: this.newTodoText,
+      });
+      this.newTodoText = "";
     },
   },
 };

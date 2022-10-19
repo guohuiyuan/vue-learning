@@ -1,17 +1,14 @@
 <template>
-    <li>{{ todo.text }}</li>
+  <li>
+    {{ title }}
+    <button @click="$emit('remove')">Remove</button>
+  </li>
 </template>
 
 <script>
 export default {
-  name: "Item",
-  props: {
-    todo: String,
-  },
-  data() {
-    return {
-      count: 0,
-    };
-  },
+  name: "todoitem",
+  props: ['title'],
+  emits: ['remove'],
 };
 </script>
