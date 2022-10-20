@@ -55,12 +55,12 @@
         <button>Add</button>
       </form>
       <ul>
-        <todoitem
+        <todo-item
           v-for="(todo, index) in todos"
           :key="todo.id"
           :title="todo.title"
           @remove="todos.splice(index, 1)"
-        ></todoitem>
+        ></todo-item>
       </ul>
     </div>
     <div>
@@ -148,52 +148,52 @@
       <span>pick: {{ pick }}</span>
     </div>
     <div id="blog-post-demo" class="demo">
-      <blogpost title="My journey with Vue"></blogpost>
-      <blogpost title="Blogging with Vue"></blogpost>
-      <blogpost title="Why Vue is so fun"></blogpost>
+      <blog-post title="My journey with Vue"></blog-post>
+      <blog-post title="Blogging with Vue"></blog-post>
+      <blog-post title="Why Vue is so fun"></blog-post>
     </div>
     <div id="blog-posts-demo">
-      <blogpost
+      <blog-post
         v-for="post in posts"
         :key="post.id"
         :title="post.title"
-      ></blogpost>
+      ></blog-post>
     </div>
     <div id="blog-posts-events-demo">
       <div v-bind:style="{ fontSize: postFontSize + 'em' }">
-        <blogpost
+        <blog-post
           v-for="post in posts"
           :key="post.id"
           :title="post.title"
           @enlarge-text="onEnlargeText"
-        ></blogpost>
+        ></blog-post>
       </div>
     </div>
     <div>
-      <custominput v-model="searchText"></custominput>
+      <custom-input v-model="searchText"></custom-input>
       <span>searchText: {{ searchText }}</span>
     </div>
     <div>
-      <alertbox> Something bad happened. </alertbox>
+      <alert-box> Something bad happened. </alert-box>
     </div>
   </div>
 </template>
 
 <script>
-import todoitem from "./Item.vue";
-import blogpost from "./BlogPost.vue";
-import custominput from "./CustomInput.vue";
-import alertbox from "./AlertBox.vue"
+import TodoItem from "./TodoItem.vue";
+import BlogPost from "./BlogPost.vue";
+import CustomInput from "./CustomInput.vue";
+import AlertBox from "./AlertBox.vue"
 export default {
   name: "HelloWorld",
   props: {
     msg: String,
   },
   components: {
-    todoitem,
-    blogpost,
-    custominput,
-    alertbox,
+    TodoItem,
+    BlogPost,
+    CustomInput,
+    AlertBox,
   },
   data() {
     return {

@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  name: "todoitem",
+  name: "todo-item",
   props: ['title'],
   emits: ['remove'],
 };
