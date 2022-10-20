@@ -147,11 +147,43 @@
       <input type="radio" v-model="pick" v-bind:value="a" />
       <span>pick: {{ pick }}</span>
     </div>
+    <div id="blog-post-demo" class="demo">
+      <blogpost title="My journey with Vue"></blogpost>
+      <blogpost title="Blogging with Vue"></blogpost>
+      <blogpost title="Why Vue is so fun"></blogpost>
+    </div>
+    <div id="blog-posts-demo">
+      <blogpost
+        v-for="post in posts"
+        :key="post.id"
+        :title="post.title"
+      ></blogpost>
+    </div>
+    <div id="blog-posts-events-demo">
+      <div v-bind:style="{ fontSize: postFontSize + 'em' }">
+        <blogpost
+          v-for="post in posts"
+          :key="post.id"
+          :title="post.title"
+          @enlarge-text="onEnlargeText"
+        ></blogpost>
+      </div>
+    </div>
+    <div>
+      <custominput v-model="searchText"></custominput>
+      <span>searchText: {{ searchText }}</span>
+    </div>
+    <div>
+      <alertbox> Something bad happened. </alertbox>
+    </div>
   </div>
 </template>
 
 <script>
 import todoitem from "./Item.vue";
+import blogpost from "./BlogPost.vue";
+import custominput from "./CustomInput.vue";
+import alertbox from "./AlertBox.vue"
 export default {
   name: "HelloWorld",
   props: {
@@ -159,6 +191,9 @@ export default {
   },
   components: {
     todoitem,
+    blogpost,
+    custominput,
+    alertbox,
   },
   data() {
     return {
@@ -204,6 +239,13 @@ export default {
       toggle: false,
       pick: "",
       a: "1",
+      posts: [
+        { id: 1, title: "My journey with Vue" },
+        { id: 2, title: "Blogging with Vue" },
+        { id: 3, title: "Why Vue is so fun" },
+      ],
+      postFontSize: 2,
+      searchText: "",
     };
   },
   methods: {
@@ -216,6 +258,9 @@ export default {
         title: this.newTodoText,
       });
       this.newTodoText = "";
+    },
+    onEnlargeText(enlargeAmount) {
+      this.postFontSize += enlargeAmount;
     },
   },
 };
